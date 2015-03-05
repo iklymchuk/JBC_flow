@@ -3,6 +3,7 @@ package com.klymchuk.flow.objects;
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Component;
+import org.springframework.webflow.execution.RequestContext;
 
 @Component
 public class UserService {
@@ -13,21 +14,34 @@ public class UserService {
 		userList.add(new User("user", "pass"));
 	}
 
-	public String checkUser(User user) {
+	public boolean userExist(User user, RequestContext contex) {
 		
-		for (User existingUser : userList) {
-			if (existingUser.equals(user)){
-				return "success";	
-			}
+		System.out.println(contex.getFlashScope().asMap());
+		
+		if (userList.contains(user)){
+			return true;	
+		} else {
+			return false; 
 		}
-
-		return "failed";
-
 	}
 	
-	
-	public  void createUser(User user){
-		userList.add(user);
+	public String createUser(User user){
+		
+		if (usernameExist(user.getName())) {
+			return "exist";
+		} else {
+			userList.add(user);
+			return "success";
+		}
+	}
+
+	private boolean usernameExist(String username) {
+		for (User user : userList) {
+			if (user.getName().equals(username)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
 

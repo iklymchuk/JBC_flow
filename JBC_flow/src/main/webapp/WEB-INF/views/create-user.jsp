@@ -23,6 +23,10 @@
 
 
 
+
+
+
+
 	<form:form method="POST" modelAttribute="user"
 		class="box login">
 
@@ -47,6 +51,11 @@
 	
 			
 			<form:password path="password"/>
+			
+					<c:if test="${not empty message}">
+			<span style="float: right" class="error">${message}</span>
+			</c:if>
+
 			
 
 		</fieldset>
