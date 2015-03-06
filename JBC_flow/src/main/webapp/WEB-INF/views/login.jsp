@@ -9,11 +9,32 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link href="<c:url value="/resources/css/home.css" />" rel="stylesheet">
+
+<link type="text/css" href="<c:url value="/resources/css/home.css" />"
+	rel="stylesheet">
+	
+	
+<link type="text/css"
+	href="<c:url value="/resources/dijit/themes/tundra/tundra.css" />"
+	rel="stylesheet" >
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
+<script type="text/javascript"
+	src="<c:url value="/resources/dojo/dojo.js" />">
+	
+</script>
 
+<script type="text/javascript"
+	src="<c:url value="/resources/spring/Spring.js" />">
+	
+</script>
+
+<script type="text/javascript"
+	src="<c:url value="/resources/spring/Spring-Dojo.js" />">
+	
+</script>
 
 </head>
 
@@ -34,10 +55,19 @@
 			<form:label path="name">
 				Username
 			</form:label>
-			<form:input path="name" />
+			<form:input path="name" id = "name" />
 		
 
-
+			<script type="text/javascript">
+				Spring.addDecoration(new Spring.ElementDecoration({
+									elementId : "name",
+									widgetType : "dijit.form.ValidationTextBox",
+									
+									widgetAttrs : {
+										promptMessage : "Please input username"
+									}
+								}));
+			</script>
 		
 
 			<form:label path="password">
@@ -46,7 +76,19 @@
 			
 	
 			
-			<form:password path="password"/>
+			<form:password path="password" id = "password"/>
+			
+			<script type="text/javascript">
+				Spring.addDecoration(new Spring.ElementDecoration({
+									elementId : "password",
+									widgetType : "dijit.form.ValidationTextBox",
+									
+									widgetAttrs : {
+										promptMessage : "Please input password"
+									}
+								}));
+			</script>
+			
 			
 			
 			<c:if test="${not empty message}">
